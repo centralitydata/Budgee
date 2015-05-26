@@ -1,0 +1,20 @@
+<template name="admin">
+  <body>
+    <div class="container bs-docs-container">
+        {{! TODO: change this back to 'unless currentUser' }}
+  			{{#unless true}}
+          <div class="row">
+            <h1>Please {{> loginButtons}}, or return <a href="/">home</a>.</h1>
+          </div>
+  		  {{else}}
+          <div class="row">
+					  <h1>Hi, Administrator {{currentUser.username.toTitleCase}}!</h1>
+          </div>
+          <div class="row">
+            <h2>Add new municipal finance data</h2>
+            {{> csv_upload}}
+          </div>
+  			{{/unless}}
+		</div>
+  </body>
+</template>
