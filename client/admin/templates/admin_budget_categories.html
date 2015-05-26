@@ -1,23 +1,23 @@
-<template name="admin_budget_codes">
+<template name="admin_budget_categories">
   <div class="row">
-    <h2>Alberta OpenData budget codes</h2>
-    <p>Codes currently in the system:</p>
+    <h2>Centrality-assigned budget categories</h2>
+    <p>Categories currently in the system:</p>
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Code</th>
+          <th>Category</th>
           <th>Name</th>
-          <th>Rev/Exp</th>
-          <th>Pairs with</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        {{#each budget_codes}}
+        {{#each budget_categories}}
           <tr>
             <td>{{code}}</td>
             <td>{{name}}</td>
-            <td>{{#if isNegative sign}}Expense{{else}}Revenue{{/if}}</td>
-            <td>{{pair_code}}</td>
+            <td>update button</td>
+            <td>delete button</td>
           </tr>
         {{/each}}
         <tr>
@@ -28,6 +28,6 @@
         </tr>
       </tbody>
     </table>
-    {{> csv_upload tag="budget_codes"}}
+    {{> csv_upload tag="budget_categories"}}
   </div>
 </template>
