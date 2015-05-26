@@ -7,13 +7,9 @@
             <h1>Please {{> loginButtons}}, or return <a href="/">home</a>.</h1>
           </div>
   		  {{else}}
-          <div class="row">
-					  <h1>Hi, Administrator {{currentUser.username.toTitleCase}}!</h1>
-          </div>
-          <div class="row">
-            <h2>Add new municipal finance data</h2>
-            {{> csv_upload}}
-          </div>
+          {{> admin_welcome}}
+          {{> admin_budget_codes}}
+          {{> admin_upload_data}}
   			{{/unless}}
 		</div>
   </body>

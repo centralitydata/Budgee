@@ -1,0 +1,25 @@
+<template name="admin_budget_codes">
+  <div class="row">
+    <h2>Alberta OpenData budget codes</h2>
+    <p>Codes currently in the system:</p>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Description</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each budget_codes}}
+          <td>{{code}}</td>
+          <td>{{description}}</td>
+          <td>update button</td>
+        {{/each}}
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td>insert button</td>
+      </tbody>
+    </table>
+  </div>
+</template>
