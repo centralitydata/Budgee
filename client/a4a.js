@@ -39,5 +39,5 @@ Template.registerHelper('isNegative', function (num) {
 Template.expenses.rendered = function () {
   var query_params = this.data;
   var tree_data = FinanceTrees.findOne(query_params);
-  Meteor.a4a_functions.draw_treemap(tree_data, '#vis');
+  Meteor.a4a_functions.draw_treemap(tree_data, '#chart');
 };
