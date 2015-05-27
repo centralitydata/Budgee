@@ -14,22 +14,25 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
   var treemap = d3.layout.treemap()
     .size([width, height])
     .sticky(true)
-    .value(function(d) { return d.value; });
+    //.value(function (d) { return d.data ? undefined : d.value; })
+    .value(function (d) { return d.value; })
+    .children(function (d) { return d.data; });
 
-  var div = d3.select(selector).append("div")
+  var div = d3.select(selector)
     .style("position", "relative")
     .style("width", (width + margin.left + margin.right) + "px")
     .style("height", (height + margin.top + margin.bottom) + "px")
     .style("left", margin.left + "px")
     .style("top", margin.top + "px");
 
-  function position() {
-    this.style("left", function(d) { return d.x + "px"; })
-        .style("top", function(d) { return d.y + "px"; })
-        .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
-        .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
+  function position () {
+    this.style("left", function (d) { return d.x + "px"; })
+        .style("top", function (d) { return d.y + "px"; })
+        .style("width", function (d) { return Math.max(0, d.dx - 1) + "px"; })
+        .style("height", function (d) { return Math.max(0, d.dy - 1) + "px"; });
   }
 
+  console.log("Root",root);
   var node = div.datum(root)
     .selectAll('.node')
       .data(treemap.nodes)
@@ -37,7 +40,6 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
       .attr('class', 'node')
       .call(position)
       .style('background', function (d) {
-        console.log('Styling',d);
         return d.data ? colour(d.name) : null;
       })
       .text(function (d) {
