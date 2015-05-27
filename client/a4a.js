@@ -18,8 +18,8 @@ Template.registerHelper('budget_categories', function () {
   return BudgetCategories.find({});
 });
 
-Template.registerHelper('finances', function () {
-  return Finances.find({});
+Template.registerHelper('finance_trees', function () {
+  return FinanceTrees.find({});
 });
 
 
@@ -36,9 +36,8 @@ Template.registerHelper('isNegative', function (num) {
  * D3
  */
 
-Template.finances.rendered = function () {
-  console.log('Rendered, have data:',this.data);
-
-  var data = Meteor.a4a_functions.load_treemap_data(this.data);
-  Meteor.a4a_functions.draw_treemap(data, '#vis');
+Template.expenses.rendered = function () {
+  var query_params = this.data;
+  var tree_data = FinanceTrees.findOne(query_params);
+  Meteor.a4a_functions.draw_treemap(tree_data, '#vis');
 };
