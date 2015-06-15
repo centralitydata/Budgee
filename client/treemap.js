@@ -4,11 +4,51 @@ Meteor.a4a_functions.load_treemap_data = function (query) {
   return FinanceTrees.findOne(query);
 };
 
+Meteor.a4a_functions.draw_treemap_new = function (root, selector) {
+  var margin = {top: 20, right: 0, bottom: 0, left: 0},
+    width = 960,
+    height = 500 - margin.top - margin.bottom,
+    formatNumber = d3.format("$,d"),
+    transitioning;
+
+  var x = d3.scale.linear()
+    .domain([0, width])
+    .range([0, width]);
+
+  var y = d3.scale.linear()
+    .domain([0, height])
+    .range([0, height]);
+
+  var svg = d3.select(selector).append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.bottom + margin.top)
+    .style("margin-left", -margin.left + "px")
+    .style("margin.right", -margin.right + "px")
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .style("shape-rendering", "crispEdges");
+
+  var grandparent = svg.append("g")
+    .attr("class", "grandparent");
+
+  grandparent.append("rect")
+    .attr("y", -margin.top)
+    .attr("width", width)
+    .attr("height", margin.top);
+
+  grandparent.append("text")
+    .attr("x", 6)
+    .attr("y", 6 - margin.top)
+    .attr("dy", ".75em");
+
+
+};
+
 Meteor.a4a_functions.draw_treemap = function (root, selector) {
   var margin = {top: 20, right: 0, bottom: 0, left: 0},
     width = 960,
     height = 500 - margin.top - margin.bottom,
-    formatNumber = d3.format(",d"),
+    formatNumber = d3.format("$,d"),
     transitioning;
 
   var x = d3.scale.linear()
@@ -19,8 +59,14 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
       .domain([0, height])
       .range([0, height]);
 
+  var colour = d3.scale.category10();
+
   var treemap = d3.layout.treemap()
-      .children(function(d, depth) { return depth ? null : d.data; })
+      .children(function(d, depth) {
+        console.log('children called with:');
+        console.log('  depth: ',depth, ', and d:', d);
+        return depth ? null : d.data;
+      })
       .sort(function(a, b) { return a.value - b.value; })
       .ratio(1) //height / width * 0.5 * (1 + Math.sqrt(5)))
       .mode('squarify')
@@ -97,10 +143,16 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
         .data(function(d) { return d.data || [d]; })
       .enter().append("rect")
         .attr("class", "child")
+        .style('fill', function (d) {
+          return 'rgba(128,128,128,' + Math.floor(255*Math.random()) + ')';
+        })
         .call(tmrect);
 
     g.append("rect")
         .attr("class", "parent")
+        .style('fill', function (d) {
+          return d.data ? colour(d.name) : null;
+        })
         .call(tmrect)
       .append("title")
         .text(function(d) { return formatNumber(d.value); });
