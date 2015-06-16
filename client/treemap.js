@@ -1,8 +1,9 @@
 Meteor.a4a_functions = Meteor.a4a_functions || {};
-
+/*
 Meteor.a4a_functions.load_treemap_data = function (query) {
   return FinanceTrees.findOne(query);
 };
+*/
 
 Meteor.a4a_functions.draw_treemap = function (root, selector) {
   // Workaround for apparent conflict between d3 and jQuery click handlers,
@@ -33,7 +34,20 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
       .domain([0, height])
       .range([0, height]);
 
-  var colour = d3.scale.category10();
+  var colour = d3.scale.category10()
+      .domain([
+        'Protective Services', // blue
+        'unused', // orange
+        'Environmental Use and Protection', // green
+        'Public Health and Welfare', // red
+        'Recreation and Culture', // purple
+        'Other', // brown
+        'General Government', // pink
+        'Transportation', // grey
+        'Planning and Development', // yellow
+        'Utilities' // cyan
+      ]);
+
 
   var treemap = d3.layout.treemap()
       .children(function(d, depth) {
@@ -136,7 +150,7 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
         })
         .call(tmrect)
       .append("title")
-        .text(function(d) { 
+        .text(function(d) {
           var lbl = d.name + ': ' + formatNumber(d.value);
           var p = d;
           while (p.parent) {
@@ -209,7 +223,7 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
   }
 
 };
-
+/*
 Meteor.a4a_functions.draw_treemap_v2 = function (root, selector) {
   var margin = {top: 20, right: 0, bottom: 0, left: 0},
     width = 960,
@@ -425,3 +439,4 @@ Meteor.a4a_functions.draw_treemap_v1 = function (root, selector) {
         return d.data ? null : d.name + '-' + depth + '-';
       });
 };
+*/

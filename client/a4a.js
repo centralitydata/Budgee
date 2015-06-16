@@ -44,8 +44,5 @@ Template.registerHelper('isNegative', function (num) {
 Template.expenses.rendered = function () {
   var query_params = this.data;
   var tree_data = FinanceTrees.findOne(query_params);
-  console.log('Template rendered');
-  console.log('query_params: ', query_params);
-  console.log('tree_data: ', tree_data);
   Meteor.a4a_functions.draw_treemap(tree_data, '#chart');
 };
