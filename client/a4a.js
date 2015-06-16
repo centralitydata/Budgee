@@ -26,12 +26,6 @@ Template.registerHelper('budget_categories', function () {
   return BudgetCategories.find({});
 });
 
-/*
-Template.registerHelper('finance_trees', function () {
-  return FinanceTrees.find({});
-});
-*/
-
 Template.registerHelper('municipalities', function () {
   return Municipalities.find({}, {sort: {municipality: 1}});
 });
@@ -49,6 +43,13 @@ Template.registerHelper('isNegative', function (num) {
   return num < 0;
 });
 
+Template.registerHelper('selected', function (prop, val) {
+  return prop == val ? 'selected' : '';
+});
+
+/***************************************************************************
+ * 'nav' template
+ */
 
 Template.nav.events({
   'submit #vis-params': function (e) {
@@ -58,6 +59,15 @@ Template.nav.events({
     var year = e.target['vis-year'].value;
 
     Router.go('expenses', {municipality_id: municipality_id, year: year});
+  }
+});
+
+Template.nav.helpers({
+  active_id: function () {
+    return Iron.controller().state.get('active_id');
+  },
+  active_year: function () {
+    return Iron.controller().state.get('active_year');
   }
 });
 
