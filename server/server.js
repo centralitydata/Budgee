@@ -10,6 +10,11 @@ Meteor.publish('budget_categories', function () {
   return BudgetCategories.find({});
 });
 
-Meteor.publish('finance_trees', function () {
-  return FinanceTrees.find({});
+Meteor.publish('finance_tree', function (municipality_id, year) {
+  var query = {
+    year: +year,
+    municipality_id: +municipality_id
+  };
+
+  return FinanceTrees.find(query);
 });

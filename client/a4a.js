@@ -18,10 +18,15 @@ Template.registerHelper('budget_categories', function () {
   return BudgetCategories.find({});
 });
 
+/*
 Template.registerHelper('finance_trees', function () {
   return FinanceTrees.find({});
 });
 
+Template.registerHelper('municipalities', function () {
+  return FinanceTrees.find({}).distinct('municipality').sort({municipality: 1});
+});
+*/
 
 /***************************************************************************
  * Additional template helpers
@@ -39,5 +44,8 @@ Template.registerHelper('isNegative', function (num) {
 Template.expenses.rendered = function () {
   var query_params = this.data;
   var tree_data = FinanceTrees.findOne(query_params);
+  console.log('Template rendered');
+  console.log('query_params: ', query_params);
+  console.log('tree_data: ', tree_data);
   Meteor.a4a_functions.draw_treemap(tree_data, '#chart');
 };
