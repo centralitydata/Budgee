@@ -15,8 +15,8 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
 
 
   var margin = {top: 25, right: 0, bottom: 0, left: 0},
-    width = 960,
-    height = 500 - margin.top - margin.bottom,
+    width = $(selector).width(),
+    height = $(selector).height() - margin.top - margin.bottom,
     formatNumber = d3.format('$,d'),
     formatPercent = d3.format('0.1f'),
     transitioning;

@@ -1,7 +1,10 @@
 #chart {
   font-family: Helvetica, Arial, sans;
+  width: 1280px;
+  height: 800px;
+  background: #ddd;
 }
-
+/*
 .node {
   border: solid 1px white;
   font: 10px sans-serif;
@@ -10,13 +13,7 @@
   position: absolute;
   text-indent: 2px;
 }
-
-#chart {
-  width: 960px;
-  height: 500px;
-  background: #ddd;
-}
-
+*/
 text {
   pointer-events: none;
 }
@@ -59,4 +56,3 @@ rect.parent,
 #chart .depth text {
   background: red;
 }
-
