@@ -1,3 +1,7 @@
+#chart {
+  font-family: Helvetica, Arial, sans;
+}
+
 .node {
   border: solid 1px white;
   font: 10px sans-serif;
@@ -25,7 +29,6 @@ rect {
   fill: none;
   stroke: #fff;
 }
-
 rect.parent,
 .grandparent rect {
   stroke-width: 2px;
@@ -43,12 +46,17 @@ rect.parent,
 .grandparent rect {
   cursor: pointer;
 }
-
+/*
 .children rect.parent {
   fill: #bbb;
   fill-opacity: .5;
 }
-
+*/
 .children:hover rect.child {
   fill: #bbb;
 }
+
+#chart .depth text {
+  background: red;
+}
+
