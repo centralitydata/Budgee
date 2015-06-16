@@ -1,0 +1,16 @@
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.jumbotron {
+  padding-top: 300px;
+  background-image: url(img/banner.jpg);
+  background-size: cover;
+  color: #105380;
+  text-shadow: 1px 1px 3px #777;
+}
+
+.centrality {
+  color: #ba121b;
+}
