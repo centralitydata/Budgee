@@ -195,14 +195,10 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
         .style('fill', function (d) {
           return d.data ? colour(d.name) : colour(d.parent.name);
         })
-        .style('fill-opacity', function (d) {
-          return 0.5;
-        })
+        .style('fill-opacity', 0.5)
         .call(tmrect)
       .append("title")
-        .text(function(d) {
-          return area_title(d);
-        });
+        .text(function(d) { return area_title(d); });
 
     g.append('text')
         .attr('dy', '.75em')
@@ -215,7 +211,13 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
     g.append('text')
         .attr('dy', '2.75em')
         .text(function (d) {
-          return '(' + Math.round(area_percentage(d)) + '% of municipal budget)';
+          var pct = area_percentage(d);
+          if (pct < 0.5) {
+            pct = pct.toFixed(1);
+          } else {
+            pct = Math.round(pct);
+          }
+          return '(' + pct + '% of municipal budget)';
         })
         .call(tmtext);
 

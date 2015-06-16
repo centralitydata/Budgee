@@ -1,30 +1,16 @@
 <template name="home">
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">&#9632; Budgee.</a>
-      </div>
-      <div id="navbar" class="navbar-collapse collapse">
-      </div><!--/.navbar-collapse -->
-    </div>
-  </nav>
+  {{> nav}}
 
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
     <div class="container">
-      <h1>&#9632; Budgee</h1>
+      <h1><img src="img/qed_treemap.png"> Budgee</h1>
       <h2>The Municipal Budget App</h2>
       <p>Welcome to Budgee, your guide to exploring where your municipality
       spends its money. The Budgee &ldquo;MBA&rdquo; uses the
       <a href="http://data.alberta.ca/">Alberta Open Data Portal</a>
-      to give you an intuitive visual representation of just how Alberta&rsquo;s
-      municipal councils choose to spend their budgets.
+      to give you an intuitive visual overview of just how Alberta&rsquo;s
+      municipal councils elect to spend their budgets.
       </p>
       <p>We&rsquo;ve crunched the numbers, so you don&rsquo;t have to.</p>
       <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
@@ -36,9 +22,6 @@
     <div class="row">
       <div class="col-md-4">
         <h2>Heading</h2>
-        {{#each municipalities}}
-          what: {{municipality}}<br>
-        {{/each}}
         <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
         <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
       </div>
@@ -57,6 +40,8 @@
     <hr>
 
     <footer>
+      <p class="pull-right attribution">Banner image by
+        <a href="https://www.flickr.com/photos/teegardin/5537894072">Ken Teegardin</a></p>
       <p><span class="centrality">&#9632;</span> Centrality Data Science, 2015</p>
     </footer>
   </div> <!-- /container -->
