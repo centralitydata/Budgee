@@ -91,10 +91,10 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
     root.depth = 0;
   }
 
-  function layout(d) {
+  function layout (d) {
     if (d.data) {
       treemap.nodes({data: d.data});
-      d.data.forEach(function(c) {
+      d.data.forEach(function (c) {
         c.x = d.x + c.x * d.dx;
         c.y = d.y + c.y * d.dy;
         c.dx *= d.dx;
@@ -105,7 +105,48 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
     }
   }
 
-  function display(d) {
+  function colloquial_number (n, d) {
+    d = d || 0;
+
+    var size,
+        size_label,
+        for_decimals,
+        num;
+
+    if (n >= 8*Math.pow(10, 8)) { // 0.8 billion
+      size = Math.pow(10, 9);
+      size_label = 'billion';
+    } else if (n >= 8*Math.pow(10, 5)) { // 0.8 million
+      size = Math.pow(10, 6);
+      size_label = 'million';
+    } else if (n >= 1000) { // 0.8 thousand just sounds weird
+      size = 1000;
+      size_label = 'thousand';
+    } else {
+      size = 1;
+      size_label = '';
+    }
+
+    for_decimals = Math.pow(10, d);
+
+    num = Math.round(n * for_decimals / size) / for_decimals;
+
+    return num + ' ' + size_label;
+  }
+
+  function area_title (d) {
+    var lbl = d.name + ':\n' + formatNumber(d.value);
+    var p = d;
+    while (p.parent) {
+      p = p.parent;
+      lbl = p.name + ', ' + lbl;
+    }
+    var pct = Math.floor(1000 * d.value / p.value) / 10;
+    lbl += ' (' + formatPercent(pct) + '%)';
+    return lbl;
+  }
+
+  function display (d) {
     grandparent
         .datum(d.parent)
         .on("click", transition)
@@ -134,7 +175,13 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
       .enter().append("rect")
         .attr("class", "child")
         .style('fill', function (d) {
-          var f = (d.parent.value > 0) ? Math.floor(128 * d.value / d.parent.value) : 0;
+          var f = 0;
+          if (d.parent.value > 0) {
+            // If there is a non-zero value to divide by,
+            // then our half-transparent covering will be somewhere between
+            // mid-grey (if this is 100% of its parent) and white (if 0%)
+            f = Math.floor(128 * d.value / d.parent.value);
+          }
           f = 255 - f;
           return 'rgb(' + f + ',' + f + ',' + f + ')';
         })
@@ -151,20 +198,16 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
         .call(tmrect)
       .append("title")
         .text(function(d) {
-          var lbl = d.name + ': ' + formatNumber(d.value);
-          var p = d;
-          while (p.parent) {
-            p = p.parent;
-            lbl = p.name + ', ' + lbl;
-          }
-          var pct = Math.floor(1000 * d.value / p.value) / 10;
-          lbl += ' (' + formatPercent(pct) + '%)';
-          return lbl;
+          return area_title(d);
         });
 
-    g.append("text")
-        .attr("dy", ".75em")
-        .text(function(d) { return d.name; })
+    g.append('text')
+        .attr('dy', '.75em')
+        .text(function (d) { return d.name; })
+        .call(tmtext);
+    g.append('text')
+        .attr('dy', '1.75em')
+        .text(function (d) { return '$' + colloquial_number(d.value, 1); })
         .call(tmtext);
 
     function transition(d) {
