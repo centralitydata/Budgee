@@ -149,6 +149,10 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
     return lbl;
   }
 
+  function clip_id (d) {
+    return 'clip-' + d.name.replace(/[^A-Za-z0-9]/g, '');
+  }
+
   function display (d) {
     grandparent
         .datum(d.parent)
@@ -164,6 +168,13 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
         .data(d.data)
       .enter().append("g");
 
+    // Add a <defs> element to store the clipPath for each top-level element
+    g.append('defs')
+      .append('clipPath') // containing a <clipPath> element
+        .attr('id', clip_id) // with a generated id to be referenced by url()
+      .append('rect') // Add a rectangle to the path
+        .call(tmrect); // with the dimensions derived from each data point
+
     g.filter(function(d) { return d.data; })
         .classed("children", true)
         .on("click", transition);
@@ -173,6 +184,7 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
           $('.grandparent').d3Click();
         });
 
+    console.log('g.child');
     g.selectAll(".child")
         .data(function(d) { return d.data || [d]; })
       .enter().append("rect")
@@ -190,6 +202,7 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
         })
         .call(tmrect);
 
+    console.log('g.parent');
     g.append("rect")
         .attr("class", "parent")
         .style('fill', function (d) {
@@ -245,8 +258,16 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
       // Transition to the new view.
       t1.selectAll("text").call(tmtext).style("fill-opacity", 0);
       t2.selectAll("text").call(tmtext).style("fill-opacity", 1);
+
+      console.log('t1 all rects');
       t1.selectAll("rect").call(tmrect);
+
+      console.log('t2 all rects');
       t2.selectAll("rect").call(tmrect);
+
+      //t1.selectAll()
+
+      // <rect x="942.7907827278599" y="583.0082864745538" width="149.25940465949623" height="114.99171352544624"></rect>
 
       // Remove the old node when the transition is finished.
       t1.remove().each("end", function() {
@@ -260,7 +281,9 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
 
   function tmtext(text) {
     text.attr("x", function(d) { return x(d.x) + 6; })
-        .attr("y", function(d) { return y(d.y) + 6; });
+        .attr("y", function(d) { return y(d.y) + 6; })
+        .attr('width', function (d) { return x(d.x + d.dx) - x(d.x); })
+        .attr('clip-path', function (d) { return 'url(#' + clip_id(d) + ')'; });
   }
 
   function tmrect(rect) {
@@ -268,6 +291,7 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
         .attr("y", function(d) { return y(d.y); })
         .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
         .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); });
+    console.log(rect);
   }
 
   function name(d) {
