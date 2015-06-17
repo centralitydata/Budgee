@@ -1,33 +1,47 @@
 <template name="home">
   {{> nav}}
 
-  <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
     <div class="container">
+
+      <img id="home-logo" class="pull-right" src="img/logo.png">
       <h1><img src="img/qed_treemap.png"> Budgee</h1>
       <h2>The Municipal Budget App</h2>
       <p>Welcome to Budgee, your guide to exploring where your municipality
-      spends its money. The Budgee &ldquo;MBA&rdquo; uses the
-      <a href="http://data.alberta.ca/">Alberta Open Data Portal</a>
-      to give you an intuitive visual overview of just how Alberta&rsquo;s
-      municipal councils elect to spend their budgets.
+        spends its money.</p>
+      <p>The Budgee &ldquo;MBA&rdquo; visualizes the
+        <a href="http://www.municipalaffairs.alberta.ca/municipal_financial_statistical_data">Municipal
+          Financial &amp; Statistical Data</a> made available through the
+        <a href="http://data.alberta.ca/">Alberta Open Data Portal</a>.
       </p>
-      <p>We&rsquo;ve crunched the numbers, so you don&rsquo;t have to.</p>
+      <p>Beyond the raw numbers, Budgee&rsquo;s interactive visualizations
+        make it easy to see how important different areas of government
+        spending are to each of the councils.</p>
+      <p>We crunch the numbers, so you don&rsquo;t have to.</p>
       <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
     </div>
   </div>
 
   <div class="container">
-    <!-- Example row of columns -->
     <div class="row">
       <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <h2>Thousands to billions</h2>
+        <p>Budgee gives you an intuitive visual overview of just how Alberta&rsquo;s
+        municipal councils elect to spend their budgets, from
+        <a href="/expenses/168/2013">Elk Island&rsquo;s 2013 expenditures</a>
+        of $19,029, to the over $3.3 billion that
+        <a href="/expenses/46/2013">Calgary spent</a>.</p>
         <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
       </div>
       <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <h2>Relative importance</h2>
+        <p>It may not be surprising that Edmonton spends more than Banff on
+          environmental use and protection&mdash;almost thirty times as much.
+          On the other hand, we can see that a full
+          <a href="/expenses/387/2013">25% of Banff&rsquo;s expenses</a>
+          go toward the environment, while only
+          <a href="/expenses/98/2013">10% of Edmonton&rsquo;s do</a>.
+        </p>
         <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
      </div>
       <div class="col-md-4">
@@ -42,7 +56,8 @@
     <footer>
       <p class="pull-right attribution">Banner image by
         <a href="https://www.flickr.com/photos/teegardin/5537894072">Ken Teegardin</a></p>
-      <p><span class="centrality">&#9632;</span> Centrality Data Science, 2015</p>
+      <p><a href="https://www.centrality.ca/"><span class="centrality">&#9632;</span>
+        Centrality Data Science, 2015</a></p>
     </footer>
   </div> <!-- /container -->
 </template>
