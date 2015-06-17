@@ -1,9 +1,54 @@
 <template name="home">
-  {{> nav}}
+  {{> nav hideInputs=true}}
 
   <div class="jumbotron">
     <div class="container">
-
+      <h1><img src="img/qed_treemap.png"> Budgee</h1>
+      <h2>The Municipal Budget App</h2>
+      <div class="row">
+        <div class="col-sm-1 col-md-2"></div>
+        <div class="col-sm-10 col-md-8">
+          <div id="main-inputs">
+            <form id="vis-params" class="form-inline">
+              <div class="form-group">
+                <select id="vis-municipality" class="form-control">
+                  <option value="-1">Select a municipality...</option>
+                  {{#each municipalities}}
+                    <option value="{{_id}}" {{selected _id active_id}}>{{name}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group">
+                <select id="vis-year" class="form-control">
+                  <option value="-1">Year</option>
+                  {{#each years}}
+                    <option value="{{year}}" {{selected year active_year}}>{{year}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <button type="submit" class="btn btn-success">Go</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p>
+            Ever wonder how your municipality spends its money?
+            Well, Budgee is here to help!
+          </p>
+          <p>
+            Select a municipality and a year, then press Go to find out!
+          </p>
+          <p>
+            <a href="#">Find out more about Budgee here.</a>
+          </p>
+        </div>
+        <div class="col-md-6 text-center">
+          <img id="home-logo" src="img/logo.png">
+        </div>
+      </div>
+<!--
       <img id="home-logo" class="pull-right" src="img/logo.png">
       <h1><img src="img/qed_treemap.png"> Budgee</h1>
       <h2>The Municipal Budget App</h2>
@@ -19,11 +64,21 @@
         spending are to each of the councils.</p>
       <p>We crunch the numbers, so you don&rsquo;t have to.</p>
       <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-    </div>
-  </div>
+    -->
+    </div> <!-- container -->
+  </div> <!-- jumbotron -->
 
   <div class="container">
     <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4 text-center">
+        <div id="social">
+          <i class="fa fa-github fa-4x"></i>
+          <i class="fa fa-twitter fa-4x"></i>
+          <i class="fa fa-youtube-play fa-4x"></i>
+        </div>
+      </div>
+      <!--
       <div class="col-md-4">
         <h2>Thousands to billions</h2>
         <p>Budgee gives you an intuitive visual overview of just how Alberta&rsquo;s
@@ -49,6 +104,7 @@
         <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
         <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
       </div>
+    -->
     </div>
 
     <hr>

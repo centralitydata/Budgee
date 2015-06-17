@@ -6,14 +6,14 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
   // Based on http://stackoverflow.com/a/11180172
   jQuery.fn.d3Click = function () {
     this.each(function (i, e) {
-      var evt = document.createEvent("MouseEvents");
-      evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+      var evt = document.createEvent('MouseEvents');
+      evt.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
 
       e.dispatchEvent(evt);
     });
   };
 
-
+  // Foundations of this routine are from http://bost.ocks.org/mike/treemap/
   var margin = {top: 25, right: 0, bottom: 0, left: 0},
     width = $(selector).width(),
     height = $(selector).height() - margin.top - margin.bottom,
@@ -52,27 +52,27 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
       .ratio(1) //height / width * 0.5 * (1 + Math.sqrt(5)))
       .mode('squarify')
       .round(false);
-  var svg = d3.select(selector).append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.bottom + margin.top)
-      .style("margin-left", -margin.left + "px")
-      .style("margin.right", -margin.right + "px")
-    .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-      .style("shape-rendering", "crispEdges");
+  var svg = d3.select(selector).append('svg')
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.bottom + margin.top)
+      .style('margin-left', -margin.left + 'px')
+      .style('margin.right', -margin.right + 'px')
+    .append('g')
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+      .style('shape-rendering', 'crispEdges');
 
-  var grandparent = svg.append("g")
-      .attr("class", "grandparent");
+  var grandparent = svg.append('g')
+      .attr('class', 'grandparent');
 
-  grandparent.append("rect")
-      .attr("y", -margin.top)
-      .attr("width", width)
-      .attr("height", margin.top);
+  grandparent.append('rect')
+      .attr('y', -margin.top)
+      .attr('width', width)
+      .attr('height', margin.top);
 
-  grandparent.append("text")
-      .attr("x", 6)
-      .attr("y", 6 - margin.top)
-      .attr("dy", ".75em");
+  grandparent.append('text')
+      .attr('x', 6)
+      .attr('y', 6 - margin.top)
+      .attr('dy', '.75em');
 
   initialise(root);
   layout(root);
@@ -156,17 +156,17 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
   function display (d) {
     grandparent
         .datum(d.parent)
-        .on("click", transition)
-      .select("text")
+        .on('click', transition)
+      .select('text')
         .text(name(d));
 
-    var g1 = svg.insert("g", ".grandparent")
+    var g1 = svg.insert('g', '.grandparent')
         .datum(d)
-        .attr("class", "depth");
+        .attr('class', 'depth');
 
-    var g = g1.selectAll("g")
+    var g = g1.selectAll('g')
         .data(d.data)
-      .enter().append("g");
+      .enter().append('g');
 
     // Add a <defs> element to store the clipPath for each top-level element
     g.append('defs')
@@ -176,18 +176,18 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
         .call(tmrect); // with the dimensions derived from each data point
 
     g.filter(function(d) { return d.data; })
-        .classed("children", true)
-        .on("click", transition);
+        .classed('children', true)
+        .on('click', transition);
 
     g.filter(function (d) { return !d.data; })
         .on('click', function () {
           $('.grandparent').d3Click();
         });
 
-    g.selectAll(".child")
+    g.selectAll('.child')
         .data(function(d) { return d.data || [d]; })
-      .enter().append("rect")
-        .attr("class", "child")
+      .enter().append('rect')
+        .attr('class', 'child')
         .style('fill', function (d) {
           var f = 0;
           if (d.parent.value > 0) {
@@ -201,14 +201,14 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
         })
         .call(tmrect);
 
-    g.append("rect")
-        .attr("class", "parent")
+    g.append('rect')
+        .attr('class', 'parent')
         .style('fill', function (d) {
           return d.data ? colour(d.name) : colour(d.parent.name);
         })
         .style('fill-opacity', 0.5)
         .call(tmrect)
-      .append("title")
+      .append('title')
         .text(function(d) { return area_title(d); });
 
     g.append('text')
@@ -236,38 +236,44 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
       if (transitioning || !d) return;
       transitioning = true;
 
-      var g2 = display(d),
-          t1 = g1.transition().duration(750),
+      // Generate the SVG elements based on this new tree node, d
+      var g2 = display(d);
+
+      // Create a transition on the current display (g1) and the new one (g2)
+      var t1 = g1.transition().duration(750),
           t2 = g2.transition().duration(750);
 
-      // Update the domain only after entering new elements.
+      // Update the domain based on the size of the tree node d
+      // (Must do this after entering new elements)
       x.domain([d.x, d.x + d.dx]);
       y.domain([d.y, d.y + d.dy]);
 
-      // Enable anti-aliasing during the transition.
-      svg.style("shape-rendering", null);
+      // Enable anti-aliasing during the transition
+      svg.style('shape-rendering', null);
 
-      // Draw child nodes on top of parent nodes.
-      svg.selectAll(".depth").sort(function(a, b) { return a.depth - b.depth; });
+      // Draw child nodes on top of parent nodes
+      svg.selectAll('.depth').sort(function(a, b) {
+        return a.depth - b.depth;
+      });
 
-      // Fade-in entering text.
-      g2.selectAll("text").style("fill-opacity", 0);
+      // Entering text initially transparent
+      g2.selectAll('text').style('fill-opacity', 0);
 
-      // Transition to the new view.
-      t1.selectAll("text").call(tmtext).style("fill-opacity", 0);
-      t2.selectAll("text").call(tmtext).style("fill-opacity", 1);
+      // Transition to the new views
+      // Old text fades to transparent
+      t1.selectAll('text').call(tmtext).style('fill-opacity', 0);
+      // New text fades to opaque
+      t2.selectAll('text').call(tmtext).style('fill-opacity', 1);
+      // Old and new rectangles transition to the new values that are
+      // calculated by tmrect now that x and y have been redefined for the
+      // new view
+      t1.selectAll('rect').call(tmrect);
+      t2.selectAll('rect').call(tmrect);
 
-      t1.selectAll("rect").call(tmrect);
 
-      t2.selectAll("rect").call(tmrect);
-
-      //t1.selectAll()
-
-      // <rect x="942.7907827278599" y="583.0082864745538" width="149.25940465949623" height="114.99171352544624"></rect>
-
-      // Remove the old node when the transition is finished.
-      t1.remove().each("end", function() {
-        svg.style("shape-rendering", "crispEdges");
+      // Remove the old node when the transition is finished
+      t1.remove().each('end', function() {
+        svg.style('shape-rendering', 'crispEdges');
         transitioning = false;
       });
     }
@@ -276,22 +282,22 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
   }
 
   function tmtext(text) {
-    text.attr("x", function(d) { return x(d.x) + 6; })
-        .attr("y", function(d) { return y(d.y) + 6; })
+    text.attr('x', function(d) { return x(d.x) + 6; })
+        .attr('y', function(d) { return y(d.y) + 6; })
         .attr('width', function (d) { return x(d.x + d.dx) - x(d.x); })
         .attr('clip-path', function (d) { return 'url(#' + clip_id(d) + ')'; });
   }
 
   function tmrect(rect) {
-    rect.attr("x", function(d) { return x(d.x); })
-        .attr("y", function(d) { return y(d.y); })
-        .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
-        .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); });
+    rect.attr('x', function(d) { return x(d.x); })
+        .attr('y', function(d) { return y(d.y); })
+        .attr('width', function(d) { return x(d.x + d.dx) - x(d.x); })
+        .attr('height', function(d) { return y(d.y + d.dy) - y(d.y); });
   }
 
   function name(d) {
     return d.parent ?
-      name(d.parent) + ": " + d.name
+      name(d.parent) + ': ' + d.name
       : d.name;
   }
 

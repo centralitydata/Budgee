@@ -2,35 +2,39 @@
   <nav class="navbar navbar-inverse">
     <div class="container">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
+        {{#unless hideInputs}}
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        {{/unless}}
         <a class="navbar-brand" href="/">&#9632; Budgee.</a>
       </div>
-      <div id="navbar" class="navbar-collapse collapse">
-        <form id="vis-params" class="navbar-form navbar-right">
-          <div class="form-group">
-            <select id="vis-municipality" class="form-control">
-              <option value="-1">Select a municipality...</option>
-              {{#each municipalities}}
-                <option value="{{_id}}" {{selected _id active_id}}>{{name}}</option>
-              {{/each}}
-            </select>
-          </div>
-          <div class="form-group">
-            <select id="vis-year" class="form-control">
-              <option value="-1">Year</option>
-              {{#each years}}
-                <option value="{{year}}" {{selected year active_year}}>{{year}}</option>
-              {{/each}}
-            </select>
-          </div>
-          <button type="submit" class="btn btn-success">Go</button>
-        </form>
-      </div><!--/.navbar-collapse -->
+      {{#unless hideInputs}}
+        <div id="navbar" class="navbar-collapse collapse">
+          <form id="vis-params" class="navbar-form navbar-right">
+            <div class="form-group">
+              <select id="vis-municipality" class="form-control">
+                <option value="-1">Select a municipality...</option>
+                {{#each municipalities}}
+                  <option value="{{_id}}" {{selected _id active_id}}>{{name}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="form-group">
+              <select id="vis-year" class="form-control">
+                <option value="-1">Year</option>
+                {{#each years}}
+                  <option value="{{year}}" {{selected year active_year}}>{{year}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <button type="submit" class="btn btn-success">Go</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      {{/unless}}
     </div>
   </nav>
 </template>

@@ -8,7 +8,7 @@ body {
 }
 
 .jumbotron {
-  padding-top: 300px;
+  padding-top: 62px;
   background-image: url(img/banner.jpg);
   background-size: cover;
   color: #105380;
@@ -31,4 +31,34 @@ body {
 
 #confused-budgie {
   vertical-align: top;
+}
+
+#main-inputs {
+  text-align: center;
+  width: 100%;
+  /* For vertical centering, need height = line-height + 2*padding */
+  height: 120px;
+  line-height: 80px;
+  padding: 20px;
+  margin: 25px 0;
+  background-color: rgba(0,0,0,0.8);
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px; /* future proofing */
+  -khtml-border-radius: 10px; /* for old Konqueror browsers */
+}
+
+#main-inputs form .form-control,
+#main-inputs form .btn {
+  font-size: 1.75em;
+  height: 1.75em;
+}
+
+#social {
+  margin-top: 50px;
+  color: #105380;
+}
+
+#social .fa {
+  margin: 0 15px;
 }
