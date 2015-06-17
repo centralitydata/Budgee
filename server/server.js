@@ -2,6 +2,17 @@ BudgetCodes._ensureIndex('code', {unique: 1});
 BudgetCategories._ensureIndex('code', {unique: 1});
 BudgetCategories._ensureIndex('name', {unique: 1});
 
+Accounts.validateLoginAttempt(function (attempt) {
+  // Co-opted from https://gentlenode.com/journal/meteor-20-verify-an-email-with-meteor-accounts/42
+  if (attempt.user && attempt.user.emails && !attempt.user.emails[0].verified) {
+    console.log('email not verified');
+
+    return false; // login aborted
+  }
+  
+  return true;
+});
+
 Meteor.publish('budget_codes', function () {
   return BudgetCodes.find({});
 });
