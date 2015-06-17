@@ -4,6 +4,7 @@
 Municipalities = new Mongo.Collection('municipalities');
 Years = new Mongo.Collection('years');
 
+
 /***************************************************************************
  * Subscriptions
  */
@@ -47,18 +48,14 @@ Template.registerHelper('selected', function (prop, val) {
   return prop == val ? 'selected' : '';
 });
 
+
 /***************************************************************************
  * 'nav' template
  */
 
 Template.nav.events({
   'submit #vis-params': function (e) {
-    e.preventDefault();
-
-    var municipality_id = e.target['vis-municipality'].value;
-    var year = e.target['vis-year'].value;
-
-    Router.go('expenses', {municipality_id: municipality_id, year: year});
+    handle_municipality_form(e);
   }
 });
 
@@ -68,6 +65,17 @@ Template.nav.helpers({
   },
   active_year: function () {
     return Iron.controller().state.get('active_year');
+  }
+});
+
+
+/***************************************************************************
+ * 'home' template
+ */
+
+Template.home.events({
+  'submit #main-inputs': function (e) {
+    handle_municipality_form(e);
   }
 });
 
@@ -101,15 +109,29 @@ Template.expenses.helpers({
     }
 
     return noData ? 'expenses_missing' : 'empty';
-
-/*
-    if (data_state === 1) {
-      return 'expenses_chart';
-    } else if (data_state === 0) {
-      return 'expenses_missing';
-    } else {
-      return 'empty';
-    }
-*/
   }
 });
+
+
+/***************************************************************************
+ * Additional functions
+ */
+
+handle_municipality_form = function (e) {
+  e.preventDefault();
+
+  var municipality_id = e.target['vis-municipality'].value;
+  var year = e.target['vis-year'].value;
+
+  if (municipality_id < 0) {
+    alert('Please select a municipality!');
+    return;
+  }
+
+  if (year < 0) {
+    alert('Please select a year!');
+    return;
+  }
+
+  Router.go('expenses', {municipality_id: municipality_id, year: year});
+};
