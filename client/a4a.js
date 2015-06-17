@@ -73,7 +73,7 @@ Template.nav.helpers({
 
 
 /***************************************************************************
- * D3
+ * 'expenses' templates
  */
 
 Template.expenses.rendered = function () {
@@ -83,5 +83,33 @@ Template.expenses.rendered = function () {
 
   var query_params = this.data;
   var tree_data = FinanceTrees.findOne(query_params);
-  Meteor.a4a_functions.draw_treemap(tree_data, '#chart');
+
+  if (tree_data) {
+    Iron.controller().state.set('tree_data_state', 1);
+    Meteor.a4a_functions.draw_treemap(tree_data, '#chart');
+  } else {
+    Iron.controller().state.set('tree_data_state', 0);
+  }
 };
+
+Template.expenses.helpers({
+  errorIfMissing: function () {
+    var noData = (Iron.controller().state.get('tree_data_state') === 0);
+
+    if (noData) {
+      $('#chart').css('display', 'none');
+    }
+
+    return noData ? 'expenses_missing' : 'empty';
+
+/*
+    if (data_state === 1) {
+      return 'expenses_chart';
+    } else if (data_state === 0) {
+      return 'expenses_missing';
+    } else {
+      return 'empty';
+    }
+*/
+  }
+});

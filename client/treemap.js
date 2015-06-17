@@ -184,7 +184,6 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
           $('.grandparent').d3Click();
         });
 
-    console.log('g.child');
     g.selectAll(".child")
         .data(function(d) { return d.data || [d]; })
       .enter().append("rect")
@@ -202,7 +201,6 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
         })
         .call(tmrect);
 
-    console.log('g.parent');
     g.append("rect")
         .attr("class", "parent")
         .style('fill', function (d) {
@@ -259,10 +257,8 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
       t1.selectAll("text").call(tmtext).style("fill-opacity", 0);
       t2.selectAll("text").call(tmtext).style("fill-opacity", 1);
 
-      console.log('t1 all rects');
       t1.selectAll("rect").call(tmrect);
 
-      console.log('t2 all rects');
       t2.selectAll("rect").call(tmrect);
 
       //t1.selectAll()
@@ -291,7 +287,6 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
         .attr("y", function(d) { return y(d.y); })
         .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
         .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); });
-    console.log(rect);
   }
 
   function name(d) {
