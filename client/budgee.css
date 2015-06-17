@@ -1,7 +1,23 @@
-body {
-  /* padding-top: 50px; */
-  padding-bottom: 20px;
+/* Stick footer thanks to http://ryanfait.com/html5-sticky-footer/ */
+* {
+  margin: 0;
 }
+
+html, body {
+  height: 100%;
+}
+
+.wrapper{
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -177px; /* Has to be negative of .footer, .push height */
+}
+
+.footer, .push {
+  height: 177px;
+}
+/* End of stick footer */
 
 .navbar {
   margin-bottom: 0;
@@ -58,6 +74,10 @@ body {
   height: 1.75em;
 }
 
+#home-logo {
+  vertical-align: middle;
+}
+
 #social {
   margin-top: 50px;
   color: #105380;
@@ -65,10 +85,4 @@ body {
 
 #social .fa {
   margin: 0 15px;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
 }
