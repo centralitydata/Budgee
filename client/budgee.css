@@ -18,6 +18,10 @@ body {
 .centrality {
   color: #ba121b;
 }
+.centrality:before {
+  //content: '\9632';
+  content: '\25A0';
+}
 
 .attribution {
   color: #666;
@@ -61,4 +65,10 @@ body {
 
 #social .fa {
   margin: 0 15px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
