@@ -1,6 +1,44 @@
 <template name="admin_upload_data">
   <div class="row">
-    <h2>Add new municipal finance data</h2>
-    {{> csv_upload tag="schedule_c"}}
+    <h2>Municipal finance data</h2>
   </div>
+  <div class="row">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Number of municipalities in system:</td>
+          <td>{{municipality_count}}</td>
+        </tr>
+        <tr>
+          <td>Years in system:</td>
+          <td>{{years_list}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!--
+  <div class="row">
+    <h3>Delete a year</h3>
+    <p>
+      <strong>Warning:</strong> This operation <em>cannot</em> be undone.
+      At least, not by any method other than re-uploading the data!
+    </p>
+    <form class="form-inline delete-year-form">
+      <div class="form-group">
+        <label for="dele-year">Delete a year:</label>
+        <select id="dele-year" class="form-control">
+          <option value="-1">Year</option>
+          {{#each years}}
+            <option value="{{year}}" {{selected year active_year}}>{{year}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-danger">Delete year</button>
+    </form>
+  </div>
+  -->
+
+  {{> csv_upload tag="schedule_c"}}
+
 </template>

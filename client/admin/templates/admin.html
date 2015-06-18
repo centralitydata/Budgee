@@ -1,15 +1,15 @@
 <template name="admin">
   <body>
     <div class="container bs-docs-container">
-  			{{#unless currentUser}}
+  			{{#unless true}}
           <div class="row">
             <h1>Please {{> loginButtons}}, or return <a href="/">home</a>.</h1>
           </div>
   		  {{else}}
-          {{> admin_welcome}}
-          {{> admin_budget_categories}}
-          {{> admin_budget_codes}}
-          {{> admin_upload_data}}
+          {{> admin_welcome}} <hr>
+          {{> admin_budget_categories}} <hr>
+          {{> admin_budget_codes}} <hr>
+          {{> admin_upload_data}} <hr>
   			{{/unless}}
 		</div>
   </body>

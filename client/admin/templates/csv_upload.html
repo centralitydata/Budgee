@@ -1,6 +1,12 @@
 <template name="csv_upload">
-  <form action="#" class="csv_form" id="csv_upload_{{this.tag}}">
-    <input type="file" id="csv_file" required="required" accept=".csv">
-    <input type="submit" value="Upload data">
-  </form>
+  <div class="row">
+    <h3>Add new data</h3>
+    <form action="#" class="csv-form" id="csv_upload_{{this.tag}}">
+      <div class="form-group">
+        <label for="csv_file" class="control-label">CSV upload</label>
+        <input type="file" id="csv_file" required="required" accept=".csv">
+      </div>
+      <button type="submit" class="btn btn-default">Upload data</button>
+    </form>
+  </div>
 </template>

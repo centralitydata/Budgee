@@ -9,7 +9,7 @@ Accounts.validateLoginAttempt(function (attempt) {
 
     return false; // login aborted
   }
-  
+
   return true;
 });
 
@@ -80,4 +80,8 @@ Meteor.publish('finance_tree', function (municipality_id, year) {
   };
 
   return FinanceTrees.find(query);
+});
+
+Meteor.publish('finance_trees', function () {
+  return FinanceTrees.find({});
 });
