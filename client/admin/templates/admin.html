@@ -7,9 +7,13 @@
           </div>
   		  {{else}}
           {{> admin_welcome}} <hr>
-          {{> admin_budget_categories}} <hr>
-          {{> admin_budget_codes}} <hr>
-          {{> admin_upload_data}} <hr>
+          <div class="panel-group" id="accordion">
+            {{> admin_years tag="years"}}
+            {{> admin_municipalities tag="municipalities"}}
+            {{> admin_budget_categories tag="budget_categories"}}
+            {{> admin_budget_codes tag="budget_codes"}}
+            {{> admin_finance_data tag="finance_data"}}
+          </div>
   			{{/unless}}
 		</div>
   </body>

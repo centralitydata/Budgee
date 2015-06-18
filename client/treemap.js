@@ -190,7 +190,7 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
         .attr('class', 'depth');
 
 
-
+/*
     var table = d3.select('#datalist').append('table')
         .attr('class', 'table'); // For bootstrap
     var thead = table.append('thead');
@@ -211,7 +211,7 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
         .data(function (d) { return [d.name, d.value]; })
       .enter().append('td')
         .text(function (d) { return d; });
-
+*/
 
 
     var g = g1.selectAll('g')

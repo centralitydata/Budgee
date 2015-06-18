@@ -19,7 +19,7 @@ Template.csv_upload.events({
   }
 });
 
-Template.admin_upload_data.events({
+Template.admin_finance_data.events({
   'submit .delete-year-form': function (e) {
     var year = $(e.currentTarget).find('#dele-year').val();
     console.log('found ', year);
@@ -45,7 +45,7 @@ Template.csv_upload.helpers({
 });
 */
 
-Template.admin_upload_data.helpers({
+Template.admin_finance_data.helpers({
   municipality_count: function () {
     if (Session.get('reactive')) {
       return Municipalities.find().count();

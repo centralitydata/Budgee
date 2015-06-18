@@ -1,6 +1,8 @@
 BudgetCodes._ensureIndex('code', {unique: 1});
 BudgetCategories._ensureIndex('code', {unique: 1});
 BudgetCategories._ensureIndex('name', {unique: 1});
+FinanceTrees._ensureIndex('municipality_id');
+FinanceTrees._ensureIndex('year');
 
 Accounts.validateLoginAttempt(function (attempt) {
   // Co-opted from https://gentlenode.com/journal/meteor-20-verify-an-email-with-meteor-accounts/42

@@ -1,0 +1,27 @@
+<template name="admin_finance_data">
+  <div class="panel panel-default">
+
+    {{> admin_panel_heading tag=tag heading="Municipal finance data"}}
+
+    <div id="collapse_{{tag}}" class="panel-collapse collapse">
+      <div class="panel-body">
+
+        <h2>Municipal finance data</h2>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Number of municipalities in system:</td>
+              <td>{{municipality_count}}</td>
+            </tr>
+            <tr>
+              <td>Years in system:</td>
+              <td>{{years_list}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        {{> csv_upload tag="schedule_c"}}
+      </div>
+    </div>
+  </div>
+</template>

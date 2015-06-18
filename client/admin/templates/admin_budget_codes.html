@@ -1,34 +1,43 @@
 <template name="admin_budget_codes">
-  <div class="row">
-    <h2>Alberta OpenData budget codes</h2>
-    <p>Codes currently in the system:</p>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Code</th>
-          <th>Name</th>
-          <th>Rev/Exp</th>
-          <th>Pairs with</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each budget_codes}}
-          <tr>
-            <td>{{code}}</td>
-            <td>{{name}}</td>
-            <td>{{#if isNegative sign}}Expense{{else}}Revenue{{/if}}</td>
-            <td>{{pair_code}}</td>
-          </tr>
-        {{/each}}
-        <tr>
-          <td><input type="text"></td>
-          <td><input type="text"></td>
-          <td>insert button</td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <div class="panel panel-default">
 
-  {{> csv_upload tag="budget_codes"}}
+    {{> admin_panel_heading tag=tag heading="Budget codes"}}
+
+    <div id="collapse_{{tag}}" class="panel-collapse collapse">
+      <div class="panel-body">
+
+        <h2>Alberta OpenData budget codes</h2>
+        <p>Codes currently in the system:</p>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Rev/Exp</th>
+              <th>Pairs with</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each budget_codes}}
+              <tr>
+                <td>{{code}}</td>
+                <td>{{name}}</td>
+                <td>{{#if isNegative sign}}Expense{{else}}Revenue{{/if}}</td>
+                <td>{{pair_code}}</td>
+              </tr>
+            {{/each}}
+            <tr>
+              <td><input type="text"></td>
+              <td><input type="text"></td>
+              <td>insert button</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        {{> csv_upload tag="budget_codes"}}
+
+      </div>
+    </div>
+  </div>
 </template>

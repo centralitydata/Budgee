@@ -1,40 +1,36 @@
-<template name="admin_budget_categories">
+<template name="admin_years">
   <div class="panel panel-default">
 
-    {{> admin_panel_heading tag=tag heading="Budget categories"}}
+    {{> admin_panel_heading tag=tag heading="Years"}}
 
     <div id="collapse_{{tag}}" class="panel-collapse collapse">
       <div class="panel-body">
-
-        <h4>Centrality-assigned budget categories</h4>
-        <p>Categories currently in the system:</p>
+        <h4>Years with data</h4>
+        <p>List of years for drop-down menus</p>
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Category</th>
-              <th>Name</th>
+              <th>Year</th>
               <th></th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {{#each budget_categories}}
+            {{#each years}}
               <tr>
-                <td>{{code}}</td>
-                <td>{{name}}</td>
-                <td>update button</td>
-                <td>delete button</td>
+                <td>{{year}}</td>
+                <td><i class="fa fa-pencil"></i></td>
+                <td><i class="fa fa-ban text-danger"></i></td>
               </tr>
             {{/each}}
             <tr>
               <td><input type="text"></td>
               <td><input type="text"></td>
-              <td>insert button</td>
+              <td><i class="fa fa-plus-circle text-success"></i></td>
               <td></td>
             </tr>
           </tbody>
         </table>
-        {{> csv_upload tag="budget_categories"}}
       </div>
     </div>
   </div>
