@@ -13,7 +13,7 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
     });
   };
 
-  // Foundations of this routine are from http://bost.ocks.org/mike/treemap/
+  // Initial basis of this routine is http://bost.ocks.org/mike/treemap/
   var margin = {top: 25, right: 0, bottom: 0, left: 0},
     width = $(selector).width(),
     height = $(selector).height() - margin.top - margin.bottom,
@@ -42,6 +42,31 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
         'Planning and Development', // yellow
         'Utilities' // cyan
       ]);
+
+
+  // Blends an RGB-A foreground colour over an opauqe greyscale layer
+  // INPUTS:
+  //   * gs is a greyscale level, an integer in the range [0, 255]
+  //   * rgb is the foreground colour, that must be parsable by d3.rgb()
+  //   * a is an alpha / opacity level, a real value in the range [0, 1]
+  //
+  // Based on http://stackoverflow.com/a/727339/607408, simplified according to:
+  //   fg.{R, G, B, A} --> rgb.{r, g, b}, a
+  //   bg.{R, G, B, A} --> {gs, gs, gs, 1}
+  //
+  function blend_gs_rgba (gs, rgb, a) {
+    rgb = d3.rgb(rgb);
+    var r = rgb.r / 255;
+    var g = rgb.g / 255;
+    var b = rgb.b / 255;
+    gs = gs / 255;
+
+    r = r * a + gs * (1 - a);
+    g = g * a + gs * (1 - a);
+    b = b * a + gs * (1 - a);
+
+    return d3.rgb(255 * r, 255 * g, 255 * b);
+  }
 
 
   var treemap = d3.layout.treemap()
@@ -163,6 +188,31 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
     var g1 = svg.insert('g', '.grandparent')
         .datum(d)
         .attr('class', 'depth');
+
+
+
+    var table = d3.select('#datalist').append('table')
+        .attr('class', 'table'); // For bootstrap
+    var thead = table.append('thead');
+    var tbody = table.append('tbody');
+
+    ['Category', 'Percentage'].forEach(function (d) {
+      thead.append('th').text(d);
+    });
+
+    var tr = tbody.selectAll('tr')
+        .data(d.data)
+      .enter().append('tr')
+        .style('background', function (d) {
+          return blend_gs_rgba(127, colour(d.name), 0.5);
+        });
+
+    var td = tr.selectAll('td')
+        .data(function (d) { return [d.name, d.value]; })
+      .enter().append('td')
+        .text(function (d) { return d; });
+
+
 
     var g = g1.selectAll('g')
         .data(d.data)

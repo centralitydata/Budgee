@@ -11,8 +11,18 @@ Years = new Mongo.Collection('years');
 
 Meteor.subscribe('budget_codes');
 Meteor.subscribe('budget_categories');
+Meteor.subscribe('finance_trees');
 Meteor.subscribe('municipalities');
 Meteor.subscribe('years');
+
+
+/***************************************************************************
+ * Initialization
+ */
+
+// On some templates we want to be able to temporarily disable reactivity,
+// e.g. during massive database updates
+Session.setDefault('reactive', true);
 
 
 /***************************************************************************
