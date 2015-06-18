@@ -99,6 +99,27 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
       .attr('y', 6 - margin.top)
       .attr('dy', '.75em');
 
+
+
+  // Build the skeleton of the table to hold details
+  var table = d3.select('#datalist')
+    .append('div')
+      .attr('class', 'col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6')
+    .append('table')
+      .attr('class', 'table'); // For bootstrap stylings
+  var theadr = table.append('thead').append('tr');
+  var tbody = table.append('tbody');
+
+  theadr.append('th').text('Category');
+  theadr.append('th').text('Percentage')
+      .style('text-align', 'right');
+
+
+  // Used to calculate percentages of the total down through all levels
+  // of the tree
+  var root_total = root.value;
+
+
   initialise(root);
   layout(root);
   display(root);
@@ -109,6 +130,16 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
     root.dx = width;
     root.dy = height;
     root.depth = 0;
+    create_percentages(root);
+  }
+
+  function create_percentages(d) {
+    if (d.data) {
+      d.data.forEach(function (c) {
+        c.pct = 100 * c.value / root_total;
+        create_percentages(c);
+      });
+    }
   }
 
   function layout (d) {
@@ -179,6 +210,65 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
   }
 
   function display (d) {
+    // Make sure the elements are in descending order, for display
+    // in the table version
+    d.data.sort(function (a, b) { return b.value - a.value; });
+
+    // Set up the rows for this data set
+    var tr = tbody.selectAll('tr').data(d.data);
+
+    tr.enter().append('tr')
+        .style('opacity', 0.0)
+      .transition()
+        .duration(750)
+        .style('opacity', 1.0);
+
+    tr.exit()
+      .transition()
+        .duration(750)
+        .style('opacity', 0.0)
+      .remove();
+
+    var td = tr.selectAll('td')
+        .data(function (d) {
+          return [
+            d.name,
+            d.pct.toFixed(2) + '%'
+          ];
+        });
+
+    td.enter().append('td')
+        .style('opacity', 0.0)
+        .style('text-align', function (d, i) {
+          return i === 1 ? 'right' : 'left';
+        })
+      .transition()
+        .duration(750)
+        .style('opacity', 1.0);
+
+    td.exit()
+      .transition()
+        .duration(750)
+        .style('opacity', 0.0)
+      .remove();
+
+    // These can't be set during the entrances, because existing rows don't
+    // count as 'entering', even if they are receiving new data
+    tr.style('background', function (d) {
+      if (d.data) { // We're looking at everything
+        return blend_gs_rgba(228, colour(d.name), 0.5);
+      } else { // We're zoomed in
+        var gs = Math.round(255 - 127*d.pct/d.parent.pct);
+        return blend_gs_rgba(gs, colour(d.parent.name), 0.5);
+      }
+    });
+
+    td.text(function (d) {
+      return d;
+    });
+
+
+    // Now on with the treemap
     grandparent
         .datum(d.parent)
         .on('click', transition)
@@ -188,31 +278,6 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
     var g1 = svg.insert('g', '.grandparent')
         .datum(d)
         .attr('class', 'depth');
-
-
-/*
-    var table = d3.select('#datalist').append('table')
-        .attr('class', 'table'); // For bootstrap
-    var thead = table.append('thead');
-    var tbody = table.append('tbody');
-
-    ['Category', 'Percentage'].forEach(function (d) {
-      thead.append('th').text(d);
-    });
-
-    var tr = tbody.selectAll('tr')
-        .data(d.data)
-      .enter().append('tr')
-        .style('background', function (d) {
-          return blend_gs_rgba(127, colour(d.name), 0.5);
-        });
-
-    var td = tr.selectAll('td')
-        .data(function (d) { return [d.name, d.value]; })
-      .enter().append('td')
-        .text(function (d) { return d; });
-*/
-
 
     var g = g1.selectAll('g')
         .data(d.data)
