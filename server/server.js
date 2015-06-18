@@ -15,6 +15,7 @@ Accounts.validateLoginAttempt(function (attempt) {
   return true;
 });
 
+
 Meteor.publish('budget_codes', function () {
   return BudgetCodes.find({});
 });
@@ -23,7 +24,15 @@ Meteor.publish('budget_categories', function () {
   return BudgetCategories.find({});
 });
 
+/**** Still learning about the uses and limitations of Mongo and Meteor.
+ **   It is taking roughly 10 seconds to return the 'year' and 'municipality'
+ **   lists by extracting them from the data as I would expect to do in an
+ **   RDBMS. So for now we'll speed things along by storing a list of years
+ **   and a list of municipalities separately.
+ ****/
 Meteor.publish('municipalities', function () {
+  return Municipalities.find({}, { sort: { name: 1 } });
+  /*
   // Select only the required fields for a municipality & year list.
   // See http://stackoverflow.com/a/23255779/607408
   var municipalities = _.uniq(FinanceTrees.find({},
@@ -55,9 +64,12 @@ Meteor.publish('municipalities', function () {
   });
 
   self.ready();
+  */
 });
 
 Meteor.publish('years', function () {
+  return Years.find({}, { sort: { year: 1 } });
+  /*
   var years = _.uniq(FinanceTrees.find({},
     {
       sort: { year: 1 },
@@ -73,6 +85,7 @@ Meteor.publish('years', function () {
   });
 
   self.ready();
+  */
 });
 
 Meteor.publish('finance_tree', function (municipality_id, year) {
