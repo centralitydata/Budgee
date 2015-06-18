@@ -63,3 +63,19 @@ Template.admin_finance_data.helpers({
     }
   }
 });
+
+Template.admin_years.events({
+  'click .insert-year': function (e) {
+    var year = +$('#year-to-insert').val();
+    if (year) {
+      Meteor.call('add_year_to_dropdown', year);
+    }
+  },
+
+  'click .delete-year': function (e) {
+    var year = +$(e.currentTarget)[0].dataset.year;
+    if (year) {
+      Meteor.call('delete_year_from_dropdown', year);
+    }
+  }
+});

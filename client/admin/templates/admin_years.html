@@ -20,13 +20,14 @@
               <tr>
                 <td>{{year}}</td>
                 <td><i class="fa fa-pencil"></i></td>
-                <td><i class="fa fa-ban text-danger"></i></td>
+                <td><i class="fa fa-ban text-danger delete-year click-icon"
+                    data-year="{{year}}"></i></td>
               </tr>
             {{/each}}
             <tr>
-              <td><input type="text"></td>
-              <td><input type="text"></td>
-              <td><i class="fa fa-plus-circle text-success"></i></td>
+              <td><input type="text" id="year-to-insert"></td>
+              <td></td>
+              <td><i class="fa fa-plus-circle text-success click-icon insert-year"></i></td>
               <td></td>
             </tr>
           </tbody>

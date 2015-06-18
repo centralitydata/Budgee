@@ -1,11 +1,4 @@
 /***************************************************************************
- * Client-only collections
- */
-Municipalities = new Mongo.Collection('municipalities');
-Years = new Mongo.Collection('years');
-
-
-/***************************************************************************
  * Subscriptions
  */
 
@@ -42,7 +35,7 @@ Template.registerHelper('municipalities', function () {
 });
 
 Template.registerHelper('years', function () {
-  return Years.find({});
+  return Years.find({}, {sort: {year: 1}});
 });
 
 

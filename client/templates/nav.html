@@ -19,7 +19,8 @@
               <select id="vis-municipality" class="form-control">
                 <option value="-1">Select a municipality...</option>
                 {{#each municipalities}}
-                  <option value="{{_id}}" {{selected _id active_id}}>{{name}}</option>
+                  <option value="{{municipality_id}}"
+                      {{selected municipality_id active_id}}>{{name}}</option>
                 {{/each}}
               </select>
             </div>
@@ -27,7 +28,8 @@
               <select id="vis-year" class="form-control">
                 <option value="-1">Year</option>
                 {{#each years}}
-                  <option value="{{year}}" {{selected year active_year}}>{{year}}</option>
+                  <option value="{{year}}"
+                      {{selected year active_year}}>{{year}}</option>
                 {{/each}}
               </select>
             </div>

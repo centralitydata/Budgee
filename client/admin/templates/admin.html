@@ -1,7 +1,7 @@
 <template name="admin">
   <body>
     <div class="container bs-docs-container">
-  			{{#unless true}}
+  			{{#unless currentUser}}
           <div class="row">
             <h1>Please {{> loginButtons}}, or return <a href="/">home</a>.</h1>
           </div>

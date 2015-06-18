@@ -20,7 +20,7 @@
             {{#each municipalities}}
               <tr>
                 <td>{{municipality_id}}</td>
-                <td>{{municipality}}</td>
+                <td>{{name}}</td>
                 <td><i class="fa fa-pencil"></i></td>
                 <td><i class="fa fa-ban text-danger"></i></td>
               </tr>
@@ -33,6 +33,8 @@
             </tr>
           </tbody>
         </table>
+
+        {{> csv_upload tag="municipalities"}}
       </div>
     </div>
   </div>
