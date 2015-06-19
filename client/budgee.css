@@ -117,3 +117,33 @@ html, body {
 .devname {
   font-weight: bold;
 }
+
+
+
+.zero-dollar-heading {
+  font-family: Helvetica, Arial, sans;
+  font-weight: bold;
+  font-size: 1.5em;
+  width: 100%;
+  height: 30px;
+  background: orange;
+  padding-top: 2px;
+  padding-left: 5px;
+  padding-right: -2px;
+}
+
+.zero-dollars {
+  font-weight: bold;
+  font-size: 1.2em;
+  text-shadow: 1px 1px 3px #555;
+  color: hsl(204, 77%, 28%);
+}
+
+.img-flip {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: 'FlipH';
+}
