@@ -1,5 +1,6 @@
 Meteor.a4a_functions = Meteor.a4a_functions || {};
 
+// Initial basis of this routine is http://bost.ocks.org/mike/treemap/
 Meteor.a4a_functions.draw_treemap = function (root, selector) {
   // Workaround for apparent conflict between d3 and jQuery click handlers,
   // that prevents click events from propagating properly.
@@ -13,13 +14,24 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
     });
   };
 
-  // Initial basis of this routine is http://bost.ocks.org/mike/treemap/
+  var vis_target = d3.select(selector);
+
+  vis_target.style('display', 'inline');
+  vis_target.append('div')
+      .attr('id', 'chart')
+      .style('width', '100%');
+  vis_target.append('div')
+      .attr('id', 'datalist');
+
   var margin = {top: 30, right: 0, bottom: 0, left: 0},
-    width = $(selector).width(),
-    height = $(selector).height() - margin.top - margin.bottom,
-    formatNumber = d3.format('$,d'),
-    formatPercent = d3.format('0.1f'),
-    transitioning;
+      width = $('#chart').width();
+
+  $('#chart').height(width / 1.618);
+
+  var height = $('#chart').height() - margin.top - margin.bottom,
+      formatNumber = d3.format('$,d'),
+      formatPercent = d3.format('0.1f'),
+      transitioning;
 
   var x = d3.scale.linear()
       .domain([0, width])
@@ -77,7 +89,7 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
       .ratio(1) //height / width * 0.5 * (1 + Math.sqrt(5)))
       .mode('squarify')
       .round(false);
-  var svg = d3.select(selector).append('svg')
+  var svg = d3.select('#chart').append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.bottom + margin.top)
       .style('margin-left', -margin.left + 'px')
@@ -110,8 +122,8 @@ Meteor.a4a_functions.draw_treemap = function (root, selector) {
   var theadr = table.append('thead').append('tr');
   var tbody = table.append('tbody');
 
-  theadr.append('th').text('Category');
-  theadr.append('th').text('Percentage')
+  theadr.append('th').text('Spending category');
+  theadr.append('th').text('Percentage of total budget')
       .style('text-align', 'right');
 
 

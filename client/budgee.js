@@ -130,7 +130,7 @@ Template.expenses.rendered = function () {
       Iron.controller().state.set('tree_data_state', 'zero-dollars');
     } else {
       Iron.controller().state.set('tree_data_state', 'data-good');
-      Meteor.a4a_functions.draw_treemap(tree_data, '#chart');
+      Meteor.a4a_functions.draw_treemap(tree_data, '#vis-target');
     }
   } else {
     Iron.controller().state.set('tree_data_state', 'data-missing');
@@ -142,9 +142,10 @@ Template.expenses.helpers({
     var template = 'empty';
     var state = Iron.controller().state.get('tree_data_state');
 
-    if (state === 'data-good') {
+    /*if (state === 'data-good') {
       template = 'expenses_chart';
-    } else if (state === 'zero-dollars') {
+    } else*/
+    if (state === 'zero-dollars') {
       template = 'expenses_zero';
     } else if (state === 'data-missing') {
       template = 'expenses_missing';
