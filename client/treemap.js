@@ -361,6 +361,8 @@ Meteor.budgee_functions.draw_treemap = function (root, selector) {
 
     function transition(d) {
       if (transitioning || !d) return;
+      if (d.value <= 0) return;
+      
       transitioning = true;
 
       // Generate the SVG elements based on this new tree node, d
