@@ -12,8 +12,12 @@
         {{/unless}}
         <a class="navbar-brand" href="/">&#9632; Budgee.</a>
       </div>
-      {{#unless hideInputs}}
-        <div id="navbar" class="navbar-collapse collapse">
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+        {{#unless hideInputs}}
           <form id="vis-params" class="navbar-form navbar-right">
             <div class="form-group">
               <select id="vis-municipality" class="form-control">
@@ -35,8 +39,8 @@
             </div>
             <button type="submit" class="btn btn-success">Go</button>
           </form>
-        </div><!--/.navbar-collapse -->
-      {{/unless}}
+        {{/unless}}
+      </div><!--/.navbar-collapse -->
     </div>
   </nav>
 </template>

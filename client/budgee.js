@@ -70,6 +70,18 @@ Template.about.helpers({
 
 
 /***************************************************************************
+ * 'contact' template
+ */
+
+Template.contact.rendered = function () {
+  var height = $('#who-we-are').height();
+  var graph = $('#creator-graph');
+  graph.height(height);
+  Meteor.a4a_functions.draw_creator_graph('#creator-graph');
+};
+
+
+/***************************************************************************
  * 'nav' template
  */
 

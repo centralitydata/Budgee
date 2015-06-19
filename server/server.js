@@ -21,7 +21,7 @@ Meteor.publish('about', function () {
 });
 
 Meteor.publish('about_videos', function () {
-  return AboutVideos.find({});
+  return AboutVideos.find({}, { sort: { seq_num: 1 } });
 });
 
 

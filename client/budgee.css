@@ -106,3 +106,14 @@ html, body {
 .panel-heading a.collapsed:after {
     content:"\e080";
 }
+
+
+
+.link {
+  stroke: rgba(186, 18, 27, 0.8);
+  stroke-width: 2px;
+}
+
+.devname {
+  font-weight: bold;
+}
