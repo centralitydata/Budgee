@@ -1,0 +1,74 @@
+<template name="admin_about">
+  <div class="panel panel-default">
+
+    {{> admin_panel_heading tag=tag heading="About"}}
+
+    <div id="collapse_{{tag}}" class="panel-collapse collapse">
+      <div class="panel-body">
+
+        <h4>About-page content</h4>
+        <p>
+          You can use basic markdown syntax in these fields to provide some
+          formatting to the page.
+        </p>
+    		<form id="edit-about-content">
+
+    			<div class="form-group">
+    				<label for="about-title">Title</label>
+    				<input type="text" class="form-control" id="about-title"
+    						placeholder="About Budgee" value="{{about.title}}">
+    			</div>
+
+    			<div class="form-group">
+    				<label for="about-lead">Lead paragraph</label>
+    				<textarea rows="5" class="form-control" id="about-lead"
+    						placeholder="This Budgee has an MBA."
+                value="{{about.lead}}"></textarea>
+    			</div>
+
+    			<div class="form-group">
+    				<label for="about-body">Additional &ldquo;About&rdquo;
+                paragraphs</label>
+    				<textarea rows="13" class="form-control" id="about-body"
+    						placeholder="This is Budgee."
+                value="{{about.body}}"></textarea>
+    			</div>
+
+          <hr>
+
+    			<div class="form-group">
+    				<label for="about-videos-title">Video-section title</label>
+    				<input type="text" class="form-control" id="about-videos-title"
+    						placeholder="Municipal-budge background videos"
+                value="{{about.videos_title}}">
+    			</div>
+
+    			<div class="form-group">
+    				<label for="about-videos-lead">Lead paragraph</label>
+    				<textarea rows="5" class="form-control" id="about-videos-lead"
+    						placeholder="Some educational videos from Budgee!"
+                value="{{about.videos_lead}}"></textarea>
+    			</div>
+
+    			<div class="form-group">
+    				<label for="about-videos-body">Additional &ldquo;About&rdquo;
+                paragraphs</label>
+    				<textarea rows="13" class="form-control" id="about-videos-body"
+    						placeholder="Watch these videos."
+                value="{{about.videos_body}}"></textarea>
+    			</div>
+
+
+    			<div class="form-group text-center">
+    				<button type="submit" class="btn btn-primary text-center">
+    					Update About page
+    				</button>
+    			</div>
+
+    		</form>
+
+      </div>
+    </div>
+
+  </div>
+</template>

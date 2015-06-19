@@ -1,0 +1,51 @@
+<template name="about">
+  <div class="wrapper">
+    {{> nav}}
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <h1>{{#markdown}}{{about.title}}{{/markdown}}</h1>
+          <p class="lead">
+            {{#markdown}}{{about.lead}}{{/markdown}}
+          </p>
+          {{#markdown}}{{about.body}}{{/markdown}}
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <h2>{{about.videos_title}}</h2>
+          <p class="lead">
+            {{#markdown}}{{about.videos_lead}}{{/markdown}}
+          </p>
+          {{#markdown}}{{about.videos_body}}{{/markdown}}
+        </div>
+      </div>
+
+      {{#each about_videos}}
+        <div class="row">
+          <div class="col-md-offset-2 col-md-8">
+            <h3>{{title}}</h3>
+            <div class="text-center">
+              <iframe width="560" height="315"
+                  src="https://www.youtube.com/embed/{{youtube_id}}"
+                  frameborder="0" allowfullscreen></iframe>
+            </div>
+            <p>
+              {{#markdown}}{{description}}{{/markdown}}
+            </p>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    
+    <div class="push"></div>
+  </div><!-- wrapper -->
+
+  {{> footer}}
+
+</template>

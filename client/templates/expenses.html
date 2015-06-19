@@ -1,14 +1,18 @@
 <template name="expenses">
-  {{> nav }}
+  <div class="wrapper">
+    {{> nav }}
 
-  <div class="container">
-    <div class="row">
-      {{> Template.dynamic template=errorIfMissing}}
-      <div id="chart"></div>
+    <div class="container">
+      <div class="row">
+        {{> Template.dynamic template=errorIfMissing}}
+        <div id="chart"></div>
 
-      <div id="datalist"></div>
+        <div id="datalist"></div>
+      </div>
     </div>
-  </div>
+
+    <div class="push"></div>
+  </div><!-- wrapper -->
 
   {{> footer attribution='attrib_abdata'}}
 </template>

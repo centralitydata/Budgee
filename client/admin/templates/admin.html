@@ -8,6 +8,8 @@
   		  {{else}}
           {{> admin_welcome}} <hr>
           <div class="panel-group" id="accordion">
+            {{> admin_about tag="about"}}
+            {{> admin_about_videos tag="about_videos"}}
             {{> admin_years tag="years"}}
             {{> admin_municipalities tag="municipalities"}}
             {{> admin_budget_categories tag="budget_categories"}}

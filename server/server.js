@@ -16,6 +16,16 @@ Accounts.validateLoginAttempt(function (attempt) {
 });
 
 
+Meteor.publish('about', function () {
+  return About.find({});
+});
+
+Meteor.publish('about_videos', function () {
+  return AboutVideos.find({});
+});
+
+
+
 Meteor.publish('budget_codes', function () {
   return BudgetCodes.find({});
 });

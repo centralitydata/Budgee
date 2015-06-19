@@ -2,11 +2,13 @@
  * Subscriptions
  */
 
-Meteor.subscribe('budget_codes');
-Meteor.subscribe('budget_categories');
-Meteor.subscribe('finance_trees');
 Meteor.subscribe('municipalities');
 Meteor.subscribe('years');
+Meteor.subscribe('budget_codes');
+Meteor.subscribe('budget_categories');
+Meteor.subscribe('about');
+Meteor.subscribe('about_videos');
+Meteor.subscribe('finance_trees');
 
 
 /***************************************************************************
@@ -49,6 +51,21 @@ Template.registerHelper('isNegative', function (num) {
 
 Template.registerHelper('selected', function (prop, val) {
   return prop == val ? 'selected' : '';
+});
+
+
+/***************************************************************************
+ * 'about' template
+ */
+
+Template.about.helpers({
+  about: function () {
+    return About.findOne({});
+  },
+
+  about_videos: function () {
+    return AboutVideos.find({});
+  }
 });
 
 

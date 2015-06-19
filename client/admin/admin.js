@@ -1,3 +1,55 @@
+Template.admin_about.helpers({
+  about: function () {
+    return About.findOne();
+  }
+});
+
+Template.admin_about_videos.helpers({
+  about_videos: function () {
+    return AboutVideos.find({});
+  }
+});
+
+
+Template.admin_about.events({
+  'submit #edit-about-content': function (e) {
+    e.preventDefault();
+
+    var about = {
+			title: e.target['about-title'].value,
+			lead: e.target['about-lead'].value,
+			body: e.target['about-body'].value,
+			videos_title: e.target['about-videos-title'].value,
+			videos_lead: e.target['about-videos-lead'].value,
+			videos_body: e.target['about-videos-body'].value
+		};
+
+		Meteor.call('edit_about', about);
+  }
+});
+
+
+Template.admin_about_videos.events({
+  'submit #new-video': function (e) {
+    e.preventDefault();
+
+    var video = {
+      seq_num: e.target['ins-video-order'].value,
+      youtube_id: e.target['ins-video-youtube-id'].value,
+      title: e.target['ins-video-title'].value
+    };
+
+    Meteor.call('insert_video', video);
+  },
+
+  'click .delete-video': function (e) {
+    e.preventDefault();
+
+    Meteor.call('delete_video', $(e.currentTarget)[0].dataset.youtubeId);
+  }
+});
+
+
 Template.csv_upload.events({
   'submit .csv-form': function (e) {
     // jQuery always returns an array of matched elements, so get the first one.
