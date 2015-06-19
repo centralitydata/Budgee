@@ -27,8 +27,8 @@ html, body {
   padding-top: 62px;
   background-image: url(img/banner.jpg);
   background-size: cover;
-  color: #105380;
-  text-shadow: 1px 1px 3px #777;
+  color: hsl(204, 77%, 28%);
+  text-shadow: 1px 1px 3px #555;
 }
 
 .centrality {
