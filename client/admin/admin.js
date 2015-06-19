@@ -6,7 +6,7 @@ Template.admin_about.helpers({
 
 Template.admin_about_videos.helpers({
   about_videos: function () {
-    return AboutVideos.find({});
+    return AboutVideos.find({}, {sort: {seq_num: 1}});
   }
 });
 

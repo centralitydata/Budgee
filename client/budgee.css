@@ -59,7 +59,6 @@ html, body {
 
 #main-inputs {
   display: inline-block;
-  /*width: 100%;*/
   /* For vertical centering, need height = line-height + 2*padding */
   height: 120px;
   line-height: 80px;
