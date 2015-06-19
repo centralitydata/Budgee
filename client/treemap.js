@@ -1,7 +1,7 @@
-Meteor.a4a_functions = Meteor.a4a_functions || {};
+Meteor.budgee_functions = Meteor.budgee_functions || {};
 
 // Initial basis of this routine is http://bost.ocks.org/mike/treemap/
-Meteor.a4a_functions.draw_treemap = function (root, selector) {
+Meteor.budgee_functions.draw_treemap = function (root, selector) {
   // Workaround for apparent conflict between d3 and jQuery click handlers,
   // that prevents click events from propagating properly.
   // Based on http://stackoverflow.com/a/11180172

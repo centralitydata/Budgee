@@ -1,6 +1,6 @@
-Meteor.a4a_functions = Meteor.a4a_functions || {};
+Meteor.budgee_functions = Meteor.budgee_functions || {};
 
-Meteor.a4a_functions.draw_creator_graph = function (selector) {
+Meteor.budgee_functions.draw_creator_graph = function (selector) {
   var nodes = [{name: 'Adam'}, {name:'Paul'}, {name:'Michael'}];
   var links = [{source:0,target:1},{source:1,target:2},{source:2,target:0}];
 

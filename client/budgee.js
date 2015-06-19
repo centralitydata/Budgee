@@ -77,7 +77,7 @@ Template.contact.rendered = function () {
   var height = $('#who-we-are').height();
   var graph = $('#creator-graph');
   graph.height(height);
-  Meteor.a4a_functions.draw_creator_graph('#creator-graph');
+  Meteor.budgee_functions.draw_creator_graph('#creator-graph');
 };
 
 
@@ -130,7 +130,7 @@ Template.expenses.rendered = function () {
       Iron.controller().state.set('tree_data_state', 'zero-dollars');
     } else {
       Iron.controller().state.set('tree_data_state', 'data-good');
-      Meteor.a4a_functions.draw_treemap(tree_data, '#vis-target');
+      Meteor.budgee_functions.draw_treemap(tree_data, '#vis-target');
     }
   } else {
     Iron.controller().state.set('tree_data_state', 'data-missing');
