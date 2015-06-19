@@ -53,13 +53,17 @@ html, body {
   vertical-align: top;
 }
 
-#main-inputs {
+#main-inputs-wrapper {
   text-align: center;
-  width: 100%;
+}
+
+#main-inputs {
+  display: inline-block;
+  /*width: 100%;*/
   /* For vertical centering, need height = line-height + 2*padding */
   height: 120px;
   line-height: 80px;
-  padding: 20px;
+  padding: 20px 50px;
   margin: 25px 0;
   background-color: rgba(0,0,0,0.8);
   -moz-border-radius: 10px;
@@ -76,6 +80,7 @@ html, body {
 
 #home-logo {
   vertical-align: middle;
+
 }
 
 #social {
